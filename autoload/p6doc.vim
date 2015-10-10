@@ -1,11 +1,11 @@
 function! p6doc#complete(arglead, cmdline, cursorpos)
   let doc = {}
   for path in s:p6inc
-    for k in filter(map(split(globpath(path, '**/*.pod'), "\n"), 'substitute(v:val[len(path):], "[\\/]", "::", "g")[:-5]'), 'v:val!~"^site"')
+    for k in filter(map(split(globpath(path, '**/*.pod'), "\n"), 'substitute(v:val[len(fnamemodify(path,":p")):], "[\\/]", "::", "g")[:-5]'), 'v:val!~"^site"')
       let doc[k] = 1
     endfor
   endfor
-  return sort(keys(doc))
+  return filter(sort(keys(doc)), 'stridx(v:val, a:arglead)==0')
 endfunction
 
 function! p6doc#run(arg)
