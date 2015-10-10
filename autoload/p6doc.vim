@@ -1,7 +1,7 @@
 function! p6doc#complete(arglead, cmdline, cursorpos)
   let doc = {}
   for path in s:p6inc
-    for k in filter(map(split(globpath(path, '**/*.pod'), "\n"), 'substitute(v:val[len(fnamemodify(path,":p")):], "[\\/]", "::", "g")[:-5]'), 'v:val!~"^site"')
+    for k in filter(map(split(globpath(path, '**/*.pod'), "\n"), 'substitute(v:val[len(fnamemodify(path,":p")):], "[\\/]", "::", "g")[:-5]'), 'v:val!~"^\\(site\\|lib\\|vendor\\)"')
       let doc[k] = 1
     endfor
   endfor
