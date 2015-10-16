@@ -10,6 +10,7 @@ endfunction
 
 function! p6doc#run(arg)
   silent new
+  exe "file" printf("[%s]", a:arg)
   setlocal filetype=man
   setlocal bufhidden=delete
   setlocal buftype=nofile
